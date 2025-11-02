@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>12-Week Job Switch Study Plan</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --> <!-- Chart.js removed as per request -->
     <!-- Chosen Palette: Calm Harmony (bg-stone-50, text-stone-700, accent-indigo-600) -->
     <!-- Application Structure Plan: A single-page dashboard with a sticky top nav for 'Schedule', 'Plan', and 'Tips'. The core is a 'Plan' section with a 12-week grid. Clicking any week dynamically populates a 'Details' pane below it. This structure provides a high-level overview (the grid) while allowing focused drill-down (the details pane), which is more usable than a long scrolling document. The weekly schedule is presented in a full-width table. -->
     <!-- Visualization & Content Choices: 1. Weekly Schedule: Inform -> HTML Table -> No interaction -> Clear, structured text. 2. Time Allocation: (Removed) 3. 12-Week Plan: Organize/Inform -> 4x3 Grid of buttons + JS-updated Details Div -> onClick -> Lets user see the "big picture" (grid) and "zoom in" on a specific week (details) -> Vanilla JS. 4. Tips: Inform -> Styled List -> No interaction -> Easy to read. -->
@@ -90,8 +89,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- MON - FRI BLOCK: Now correctly uses rowspan="2" for 2 time slots -->
                             <tr class="border-b border-stone-200">
-                                <td class="p-3 font-medium" rowspan="3">Mon - Fri</td>
+                                <td class="p-3 font-medium" rowspan="2">Mon - Fri</td>
                                 <td class="p-3">12:00 PM - 8:00 PM</td>
                                 <td class="p-3">Work</td>
                                 <td class="p-3 text-stone-500">(8.0 hrs)</td>
@@ -101,16 +101,17 @@
                                 <td class="p-3 font-semibold text-emerald-700">Focused Study</td>
                                 <td class="p-3 font-semibold text-emerald-700">(2.5 hrs)</td>
                             </tr>
+                            
+                            <!-- SATURDAY BLOCK: Now correctly uses rowspan="4" for 4 time slots -->
                             <tr class="border-b border-stone-200 bg-stone-50">
-                                <td class="p-3 font-medium" rowspan="3">Saturday</td>
+                                <td class="p-3 font-medium" rowspan="4">Saturday</td>
                                 <td class="p-3 font-semibold text-emerald-700">~2:00 PM - 5:00 PM</td>
-                                <td class="p-3 font-semibold text-emerald-700">Focused Study</td>
+                                <td class="p-3 font-semibold text-emerald-700">Focused Study (ML/DS)</td>
                                 <td class="p-3 font-semibold text-emerald-700">(3.0 hrs)</td>
                             </tr>
                             <tr class="border-b border-stone-200 bg-stone-50">
-                                <td class="p-3 font-medium" rowspan="3">Saturday</td>
                                 <td class="p-3 font-semibold text-indigo-600">~2:00 PM - 5:00 PM</td>
-                                <td class="p-3 font-semibold text-indigo-600">Focused Study</td>
+                                <td class="p-3 font-semibold text-indigo-600">Focused Study (SWE/SD)</td>
                                 <td class="p-3 font-semibold text-indigo-600">(3.0 hrs)</td>
                             </tr>
                             <tr class="border-b border-stone-200 bg-stone-50">
@@ -123,6 +124,8 @@
                                 <td class="p-3">Job Hunt & Apps</td>
                                 <td class="p-3 text-stone-500">(2.0 hrs)</td>
                             </tr>
+                            
+                            <!-- SUNDAY BLOCK: Already correct, using rowspan="3" for 3 time slots -->
                             <tr class="border-b border-stone-200">
                                 <td class="p-3 font-medium" rowspan="3">Sunday</td>
                                 <td class="p-3 font-semibold text-emerald-700">~2:00 PM - 6:00 PM</td>
