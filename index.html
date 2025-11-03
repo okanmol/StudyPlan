@@ -6,9 +6,6 @@
     <title>12-Week Job Switch Study Plan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chosen Palette: Calm Harmony (bg-stone-50, text-stone-700, accent-indigo-600) -->
-    <!-- Application Structure Plan: A single-page dashboard with a sticky top nav for 'Schedule', 'Plan', and 'Tips'. The core is a 'Plan' section with a 12-week grid. Clicking any week dynamically populates a 'Details' pane below it. This structure provides a high-level overview (the grid) while allowing focused drill-down (the details pane), which is more usable than a long scrolling document. The weekly schedule is presented in a full-width table. -->
-    <!-- Visualization & Content Choices: 1. Weekly Schedule: Inform -> HTML Table -> No interaction -> Clear, structured text. 2. Time Allocation: (Removed) 3. 12-Week Plan: Organize/Inform -> 4x3 Grid of buttons + JS-updated Details Div -> onClick -> Lets user see the "big picture" (grid) and "zoom in" on a specific week (details) -> Vanilla JS. 4. Tips: Inform -> Styled List -> No interaction -> Easy to read. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -89,7 +86,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- MON - FRI BLOCK: Now correctly uses rowspan="2" for 2 time slots -->
+                            <!-- MON - FRI BLOCK -->
                             <tr class="border-b border-stone-200">
                                 <td class="p-3 font-medium" rowspan="2">Mon - Fri</td>
                                 <td class="p-3">12:00 PM - 8:00 PM</td>
@@ -102,11 +99,11 @@
                                 <td class="p-3 font-semibold text-emerald-700">(2.5 hrs)</td>
                             </tr>
                             
-                            <!-- SATURDAY BLOCK: FIXED - Now uses rowspan="3" for 3 distinct time slots. The study focus is combined and noted as phase-specific. -->
+                            <!-- SATURDAY BLOCK -->
                             <tr class="border-b border-stone-200 bg-stone-50">
                                 <td class="p-3 font-medium" rowspan="3">Saturday</td>
                                 <td class="p-3 font-semibold text-emerald-700">2:00 PM - 5:00 PM</td>
-                                <td class="p-3 font-semibold text-emerald-700">Focused Study</td>
+                                <td class="p-3 font-semibold text-emerald-700">Focused Study (Phase-Specific)</td>
                                 <td class="p-3 font-semibold text-emerald-700">(3.0 hrs)</td>
                             </tr>
                             <tr class="border-b border-stone-200 bg-stone-50">
@@ -120,7 +117,7 @@
                                 <td class="p-3 text-stone-500">(2.0 hrs)</td>
                             </tr>
                             
-                            <!-- SUNDAY BLOCK: Already correct, using rowspan="3" for 3 time slots -->
+                            <!-- SUNDAY BLOCK -->
                             <tr class="border-b border-stone-200">
                                 <td class="p-3 font-medium" rowspan="3">Sunday</td>
                                 <td class="p-3 font-semibold text-emerald-700">~2:00 PM - 6:00 PM</td>
@@ -374,7 +371,12 @@
         let currentActiveButton = null;
         let currentWeekTopics = "";
 
-        function showWeekDetails(weekNum) {
+        /**
+         * Updates the weekly detail section and optionally scrolls to it.
+         * @param {number} weekNum The week number to display.
+         * @param {boolean} shouldScroll If true, scrolls the container into view. Defaults to true.
+         */
+        function showWeekDetails(weekNum, shouldScroll = true) {
             const data = planData[weekNum];
             
             detailTitle.textContent = `${data.phase}: ${data.title}`;
@@ -404,7 +406,10 @@
 
             detailContainer.style.display = 'block';
 
-            detailContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Only scroll if explicitly requested (i.e., when a button is clicked)
+            if (shouldScroll) {
+                detailContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -417,9 +422,8 @@
         });
         
         window.onload = () => {
-            // Chart.js initialization code removed
-            
-            showWeekDetails(1);
+            // Call with 'false' to load Week 1 details without forcing a scroll on page load.
+            showWeekDetails(1, false); 
         };
     </script>
 </body>
